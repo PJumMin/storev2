@@ -11,6 +11,12 @@ import java.util.List;
 public class StoreService {
     private final StoreRepository storeRepository;
 
+    // Detail
+    public Store detail(int userId) {
+        Store store = storeRepository.findById(userId);
+        return store;
+    }
+
     // Save
     @Transactional
     public void save(StoreRequest.saveDTO saveDTO) {

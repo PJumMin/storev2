@@ -24,7 +24,11 @@ public class StoreRepository {
         query.setParameter(2, saveDTO.stock);
         query.setParameter(3, saveDTO.price);
         query.executeUpdate();
-
     }
 
+    public Store findById(int userId) {
+        Query query = em.createNativeQuery("select * from store_tb WHERE id=? ORDER BY id", Store.class);
+        query.setParameter(1, userId);
+        return (Store) query.getSingleResult();
+    }
 }

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -12,6 +13,14 @@ import java.util.List;
 @Controller
 public class StoreController {
     private final StoreService storeService;
+
+    // DetailPage
+    @GetMapping("store/{id}")
+    public String detail(HttpServletRequest request, @PathVariable("id") int id) {
+        Store detail = storeService.detail(id);
+        request.setAttribute("model", detail);
+        return "store/detail";
+    }
 
     // Save
     @PostMapping("store/save")
