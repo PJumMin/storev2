@@ -18,4 +18,19 @@ public class UserService {
         // 3. 없으면 회원가입
         userRepository.save(joinDTO);
     }
+
+    public User login(UserRequest.LoginDTO loginDTO) {
+        // 1. 있는 아이디인가?
+        User user = userRepository.findByUsername(loginDTO.getUsername());
+        // 2. 아이디와 비밀번호가 일치하는가?
+        if (user == null) {
+            throw new RuntimeException("아이디가 틀렸습니다");
+        }
+
+        if (!(user.getPassword().equals(loginDTO.getPassword()))) {
+            throw new RuntimeException("비밀번호가 틀렸습니다");
+        }
+        return user;
+        // 3. 둘 다 맞으면 로그인
+    }
 }
