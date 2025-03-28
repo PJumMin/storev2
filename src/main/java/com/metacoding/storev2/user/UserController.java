@@ -12,7 +12,6 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-
     // MainPage
     @GetMapping("/")
     public String home() {
