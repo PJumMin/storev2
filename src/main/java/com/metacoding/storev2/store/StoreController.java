@@ -16,6 +16,13 @@ public class StoreController {
     private final StoreService storeService;
     private final HttpSession session;
 
+    //delete
+    @PostMapping("store/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        storeService.delete(id);
+        return "redirect:/store/list";
+    }
+
     // Update
     @PostMapping("store/{id}/update")
     public String update(StoreRequest.saveDTO saveDTO, @PathVariable("id") int id) {

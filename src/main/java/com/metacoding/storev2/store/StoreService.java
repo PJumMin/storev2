@@ -33,4 +33,10 @@ public class StoreService {
     public List<Store> storeList() {
         return storeRepository.findAll();
     }
+
+    // Delete
+    @Transactional
+    public void delete(int id) {
+        storeRepository.delete(id);
+    }
 }

@@ -44,4 +44,10 @@ public class StoreRepository {
         query.setParameter(1, userId);
         return (Store) query.getSingleResult();
     }
+
+    public void delete(int id) {
+        Query query = em.createNativeQuery("delete from store_tb where id=?");
+        query.setParameter(1, id);
+        query.executeUpdate();
+    }
 }
