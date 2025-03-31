@@ -11,6 +11,12 @@ import java.util.List;
 public class StoreService {
     private final StoreRepository storeRepository;
 
+    //Update
+    @Transactional
+    public void update(StoreRequest.saveDTO saveDTO, Integer id) {
+        storeRepository.updateById(saveDTO, id);
+    }
+
     // Detail
     public Store detail(int userId) {
         Store store = storeRepository.findById(userId);

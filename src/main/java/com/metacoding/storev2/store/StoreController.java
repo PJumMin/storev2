@@ -1,6 +1,7 @@
 package com.metacoding.storev2.store;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,22 @@ import java.util.List;
 @Controller
 public class StoreController {
     private final StoreService storeService;
+    private final HttpSession session;
+
+    // Update
+    @PostMapping("store/{id}/update")
+    public String update(StoreRequest.saveDTO saveDTO, @PathVariable("id") int id) {
+        storeService.update(saveDTO, id);
+        return "redirect:/store/" + id;
+    }
+
+    // UpdatePage
+    @GetMapping("store/{id}/update-form")
+    public String updateForm(HttpServletRequest request, @PathVariable("id") int id) {
+        Store update = storeService.detail(id);
+        request.setAttribute("model", update);
+        return "store/update-form";
+    }
 
     // DetailPage
     @GetMapping("store/{id}")
